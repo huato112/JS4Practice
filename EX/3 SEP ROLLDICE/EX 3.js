@@ -1,11 +1,8 @@
+let howManyGames = 5;
 let player1 = {name: "alice", roll: [], result: [] };
 let player2 = {name: "bob", roll: [], result: [] };
 let count = 0;
-let dice = {roll:function(){return Math.floor(Math.random() * 6) + 1}}
-
-// function rollDice(){
-//     return Math.floor(Math.random() * 6) + 1 //return random (0-5) + 1
-// }
+let dice = {roll:function(){return Math.floor(Math.random() * 6) + 1}} // 
 
 function gameResult(roll1,roll2){
 
@@ -25,9 +22,10 @@ function gameResult(roll1,roll2){
     player2.roll[count] = roll2;
     count++;
 }
+    while (howManyGames > 0){
+        howManyGames--;
+        gameResult(dice.roll(),dice.roll());
+    }
 
-gameResult(dice.roll(),dice.roll());
-gameResult(dice.roll(),dice.roll());
-gameResult(dice.roll(),dice.roll());
 console.log(player2);
 console.log(player1);
