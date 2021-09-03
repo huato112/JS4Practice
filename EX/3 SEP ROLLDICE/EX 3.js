@@ -41,6 +41,7 @@ while (howManyGames > 0) {
   gameResult(dice.roll(), dice.roll());
 }
 
+howManyGames = 4;
 console.log(player2);
 console.log(player1);
 console.log(getWin(player1.wincount,player2.wincount));
