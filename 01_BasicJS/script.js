@@ -34,4 +34,23 @@ console.log(`type of mySymbol is ${typeof mySymbol}`);
 let myNull = null;
 console.log(`type of myNull is ${typeof myNull}`);
 
-console.log('Good bye!');
+let myArr = [1, 2, 3];
+
+console.log(`myArr Length: ${myArr.length}`);
+console.log(`type of myArr is ${typeof myArr}`);
+
+let myObj = [
+  {
+    id: 1,
+    task: 'grading exam'
+  },
+  {
+    id: 2,
+    task: 'class lecture',
+    date: new Date()
+  }
+];
+
+console.log(`${JSON.stringify(myObj)}`);
+//The JSON.stringify() method converts a JavaScript object or value to a JSON string
+console.log(`type of myObj is ${typeof myObj}`);
