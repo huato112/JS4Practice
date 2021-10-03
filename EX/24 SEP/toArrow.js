@@ -35,7 +35,7 @@ function greetingSomeOne(name) {
     return `${greeting[Math.floor(Math.random(3))]}, ${name}`;
 }
 
-name => {
+let greetingSomeOne = name => {
     const greeting = ['hi', 'hello', 'hey'];
     return `${greeting[Math.floor(Math.random(3))]}, ${name}`;
 }
