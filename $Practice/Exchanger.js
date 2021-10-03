@@ -27,7 +27,6 @@ class MoneyExchanger {
         let result = this.foreignUnits.find((value) => to == value.foreignUnits)
         return [this._yourMoney * result.exchangeRate, result.foreignUnits]
     }
-.    
 }
 
 let p1 = new MoneyExchanger(1000);

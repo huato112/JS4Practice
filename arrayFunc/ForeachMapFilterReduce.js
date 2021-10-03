@@ -32,7 +32,7 @@ studentReduce = arr.reduce((previousValue, currentValue) => previousValue + curr
 ///////////////////////////////////////////////////////////////
 //Menu
 console.log(student);
-console.log(studentForeach);
+// console.log(studentForeach);
 // console.log(studentMap);
 // console.log(studentFilter);
 // console.log(studentReduce);
