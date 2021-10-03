@@ -7,6 +7,8 @@ let products = [
 let priceIncludeVat = products.map(
   (product) => product.price + product.price * 0.07
 );
+
+
 console.log(priceIncludeVat);
 
 let totalAmt = products.reduce(
