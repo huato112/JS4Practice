@@ -17,15 +17,15 @@ class MoneyExchanger {
         //     }
         // }
 
-        // let result = []
-        // this.foreignUnits.forEach((value) => {
-        //     if (to == value.foreignUnits)
-        //         result = [this._yourMoney * value.exchangeRate, value.foreignUnits]
-        // })
-        // return result;
+        let result = []
+        this.foreignUnits.forEach((value) => {
+            if (to == value.foreignUnits)
+                result = [this._yourMoney * value.exchangeRate, value.foreignUnits]
+        })
+        return result;
 
-        let result = this.foreignUnits.find((value) => to == value.foreignUnits)
-        return [this._yourMoney * result.exchangeRate, result.foreignUnits]
+        // let result = this.foreignUnits.find((value) => to == value.foreignUnits)
+        // return [this._yourMoney * result.exchangeRate, result.foreignUnits]
     }
 }
 
