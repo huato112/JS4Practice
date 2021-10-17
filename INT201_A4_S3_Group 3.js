@@ -8,10 +8,10 @@ console.log('///////////////////////////')
 //true หมดเลยยย
 let arrTrue = [true, true, true];
 console.log(arrTrue.every((value) => value)); //true
-
 //ลองมี false หลุดมาซักตัว
 let arrFalse = [true, true, false];
 console.log(arrFalse.every((value) => value)); //false
+console.log(arrFalse.every((value) => value));
 
 //ลองแบบ false หมด
 let arrAllFalse = [false, false, false];
@@ -68,9 +68,9 @@ console.log(arr.indexOf(2, 2)); //4 เริ่มที่ index 2 ans 4
 
 let arrstr = ['kobfha', 'exist', 'mxxn', 'amorn', 'jame', 'jubby'];
 console.log(arrstr.indexOf('mxxn')); //2
-console.log(arrstr.indexOf('Mxxn')); //-1 ไม่เจอเพราะเป็น case sensitive
+console.log(arrstr.indexOf('Mxxn')); //-1 ไม่เจอ
 
 let a = [4,9,8];
 let arrinarr = [1,5,6,[4,5,6],8,a];
-console.log(arrinarr.indexOf([4,5,6])); //-1 เพราะ Array เป็น Object เวลาสร้างใหม่จะมี Address คนละตัว
+console.log(arrinarr.indexOf([4,5,6])); //-1 เพราะ Array เป็น Object Address คนละตัวกับใน arrinarr
 console.log(arrinarr.indexOf(a)); //5
