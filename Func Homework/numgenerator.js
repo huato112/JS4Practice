@@ -1,10 +1,10 @@
-function number(fn, a= 0, b=2){
+function number(fn, a= 0, b=2){ //func ไว้เรียกตัวอื่นอีกที
     return fn(a, b);
 }
-function add(a, b) {
+function add(a, b) { //บวกเลข
     return a + b; 
 }
-function sub(a, b) {
+function sub(a, b) { //ลบเลข
     return a - b;
 }
 
