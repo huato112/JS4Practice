@@ -14,6 +14,7 @@ export let sampleData = [
     Name: "Athiti",
     Price: 2400.0,
     img: "img/Athiti.jpg",
+    info: "หล่อเป็นพิเศษ"
   },
   {
     Name: "Udomchai",

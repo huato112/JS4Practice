@@ -11,23 +11,30 @@ sampleData.forEach((value) => {
 
   if (num == 0) {
     newDiv = document.createElement("div"); //create <div></div>
-    newDiv.setAttribute("class", "d-flex justify-content-evenly");
+    newDiv.setAttribute("class", "d-flex justify-content-evenly d-flex");
   }
 
   num = num + 1;
   //create img
   let img = document.createElement("img");
   img.src = `${value.img}`;
-  img.width = 100;
-  img.height = 101;
+  img.className = "img-fluid"
+  img.width = "150"
+
 
   const contentDiv = document.createElement("div");
-  contentDiv.setAttribute("class", "p-2 bd-highlight");
+  contentDiv.setAttribute("class", "d-flex shadow p-3 mb-5 bg-body rounded p-2 bd-highlight card mh-100 ");
   contentDiv.appendChild(img); //ใส่รูปอิอิ
   contentDiv.appendChild(document.createElement("br"));
   contentDiv.appendChild(document.createTextNode(`Name: ${value.Name}`)); //ใส่ข้อมูลใน div ย่อย
   contentDiv.appendChild(document.createElement("br"));
   contentDiv.appendChild(document.createTextNode(`Price: ${value.Price}`));
+  contentDiv.appendChild(document.createElement("br"));
+
+  if (typeof value.info !== "undefined"){
+    contentDiv.appendChild(document.createTextNode(`Info: ${value.info}`))
+  }
+
   newDiv.appendChild(contentDiv);
 
   document.getElementById("Product").appendChild(newDiv); //เอา div ใส่ product
