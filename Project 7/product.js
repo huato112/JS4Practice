@@ -58,4 +58,81 @@ export let sampleData = [
     img: "img/Udomchai.jpg",
     Status: "ว่าง"
   },
+  {
+    Id : "M7",
+    Name: "Athiti",
+    Price: 2400.0,
+    img: "img/Athiti.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M8",
+    Name: "Udomchai",
+    Price: 2000.5,
+    img: "img/Udomchai.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M7",
+    Name: "Athiti",
+    Price: 2400.0,
+    img: "img/Athiti.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M8",
+    Name: "Udomchai",
+    Price: 2000.5,
+    img: "img/Udomchai.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M7",
+    Name: "Athiti",
+    Price: 2400.0,
+    img: "img/Athiti.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M8",
+    Name: "Udomchai",
+    Price: 2000.5,
+    img: "img/Udomchai.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M7",
+    Name: "Athiti",
+    Price: 2400.0,
+    img: "img/Athiti.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M8",
+    Name: "Udomchai",
+    Price: 2000.5,
+    img: "img/Udomchai.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M7",
+    Name: "Athiti",
+    Price: 2400.0,
+    img: "img/Athiti.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M8",
+    Name: "Udomchai",
+    Price: 2000.5,
+    img: "img/Udomchai.jpg",
+    Status: "ว่าง"
+  },
+  {
+    Id : "M7",
+    Name: "Athiti",
+    Price: 2400.0,
+    img: "img/Athiti.jpg",
+    Status: "ว่าง"
+  }
 ];

@@ -5,13 +5,13 @@ let newDiv;
 let num = 0;
 
 sampleData.forEach((value) => {
-  if (num == 4) {
+  if (num == 5) {
     num = 0;
   }
 
   if (num == 0) {
     newDiv = document.createElement("div"); //create <div></div>
-    newDiv.setAttribute("class", "d-flex justify-content-evenly");
+    newDiv.setAttribute("class", "d-flex justify-content-center mw-100");
   }
 
   num = num + 1;
@@ -24,7 +24,7 @@ sampleData.forEach((value) => {
 
 
   const contentDiv = document.createElement("div");
-  contentDiv.setAttribute("class", "shadow p-3 mb-5 bg-body rounded p-2 bd-highlight card mh-100");
+  contentDiv.setAttribute("class", "shadow p-3 mb-5 bg-body rounded p-2 bd-highlight card mh-100 px-md-4 py-md-4 mx-md-4 my-md-4");
   contentDiv.appendChild(img); //ใส่รูปอิอิ
   contentDiv.appendChild(document.createElement("br"));
   contentDiv.appendChild(document.createTextNode(`ID: ${value.Id}`)); //ใส่ข้อมูลใน div ย่อย
