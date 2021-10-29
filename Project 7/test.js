@@ -27,6 +27,8 @@ sampleData.forEach((value) => {
   contentDiv.setAttribute("class", "shadow p-3 mb-5 bg-body rounded p-2 bd-highlight card mh-100");
   contentDiv.appendChild(img); //ใส่รูปอิอิ
   contentDiv.appendChild(document.createElement("br"));
+  contentDiv.appendChild(document.createTextNode(`ID: ${value.Id}`)); //ใส่ข้อมูลใน div ย่อย
+  contentDiv.appendChild(document.createElement("br"));
   contentDiv.appendChild(document.createTextNode(`Name: ${value.Name}`)); //ใส่ข้อมูลใน div ย่อย
   contentDiv.appendChild(document.createElement("br"));
   contentDiv.appendChild(document.createTextNode(`Price: ${value.Price}`));
