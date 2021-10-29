@@ -11,29 +11,44 @@ sampleData.forEach((value) => {
 
   if (num == 0) {
     newDiv = document.createElement("div"); //create <div></div>
-    newDiv.setAttribute("class", "d-flex justify-content-evenly d-flex");
+    newDiv.setAttribute("class", "d-flex justify-content-evenly");
   }
 
   num = num + 1;
   //create img
   let img = document.createElement("img");
   img.src = `${value.img}`;
-  img.className = "img-fluid"
+  //img.className = "img-fluid"
   img.width = "150"
+  img.height = "150"
 
 
   const contentDiv = document.createElement("div");
-  contentDiv.setAttribute("class", "d-flex shadow p-3 mb-5 bg-body rounded p-2 bd-highlight card mh-100 ");
+  contentDiv.setAttribute("class", "shadow p-3 mb-5 bg-body rounded p-2 bd-highlight card mh-100");
   contentDiv.appendChild(img); //ใส่รูปอิอิ
   contentDiv.appendChild(document.createElement("br"));
   contentDiv.appendChild(document.createTextNode(`Name: ${value.Name}`)); //ใส่ข้อมูลใน div ย่อย
   contentDiv.appendChild(document.createElement("br"));
   contentDiv.appendChild(document.createTextNode(`Price: ${value.Price}`));
-  contentDiv.appendChild(document.createElement("br"));
 
   if (typeof value.info !== "undefined"){
+    contentDiv.appendChild(document.createElement("br"));
     contentDiv.appendChild(document.createTextNode(`Info: ${value.info}`))
+  }else{
+    contentDiv.appendChild(document.createElement("br"));
+    contentDiv.appendChild(document.createTextNode(`Info: -`))
   }
+  contentDiv.appendChild(document.createElement("br"));
+  contentDiv.appendChild(document.createTextNode(`Status: ${value.Status}`))
+  // class btn btn-primary
+  // create button
+
+  let btn = document.createElement("a");
+  btn.setAttribute("class", "btn btn-primary mw-100");
+  btn.setAttribute("href", "https://www.google.com");
+  btn.setAttribute("target", "_blank");
+  btn.appendChild(document.createTextNode("1 Night"))
+  contentDiv.appendChild(btn);
 
   newDiv.appendChild(contentDiv);
 
