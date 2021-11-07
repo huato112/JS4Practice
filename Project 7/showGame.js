@@ -1,33 +1,5 @@
 import { sampleData } from "./product.js";
 
-let header = document.createElement("div");
-  header.innerHTML = `
-  <header class= "navbar navbar-expand-lg navbar-light bg-light">
-  <nav class="container-xxl">
-    <a class="navbar-brand" href="#"><img src= "https://cdn.iconscout.com/icon/premium/png-256-thumb/game-shop-3765597-3140495.png" height="30" class="d-inline-block align-top" alt=""> GameShop</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" href="index.html">Home</a>
-        </li>
-        <li class="nav-item active">
-          <div class="input-group my-2 my-lg-0">
-            <div class="form-outline">
-              <input class="form-control mr-sm-2" type="search" id="search" placeholder="Search">
-            </div>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="searchbtn">
-              <i class="fas fa-search" aria-hidden="true"></i> Search
-            </button>
-          </div>
-        </li>
-      </ul>
-      <div id = "cart"></div>
-    </div>
-  </nav></header>
-  `
-
-  document.getElementById("navbar").appendChild(header);
-
 // search แบบเก่ายาวเกินเลยทำสั้น ๆ innerhtml เอา
 // let searchdiv1 = document.createElement("div");
 // searchdiv1.setAttribute("class", "input-group");
@@ -78,11 +50,8 @@ sampleData.forEach((value) => {
   img.setAttribute("class", "game-image card-img-top img-fluid");
 
   const contentDiv = document.createElement("div");
-  contentDiv.setAttribute(
-    "class",
-    "card col-md-6 mx-auto mh-100 px-md-4 py-md-4 mx-md-4 my-md-4"
-  );
   contentDiv.appendChild(img); //ใส่รูปอิอิ
+  contentDiv.setAttribute("class", "card col-md-6 mx-auto mh-100 px-md-4 py-md-4 mx-md-4 my-md-4");
   contentDiv.setAttribute("Name", value.Name);
   contentDiv.id = "Game";
 
@@ -128,28 +97,6 @@ sampleData.forEach((value) => {
   contentProd.appendChild(listProd); //เอา div ใส่ product
 });
   document.getElementById("Index").appendChild(contentProd)
-
-
-
-const gameStore = document.querySelectorAll("#Game");
-const searchclick = document.getElementById("searchbtn");
-searchclick.addEventListener("click", () => {
-  searchGame(document.getElementById("search").value)
-}, false);
-
-function searchGame(e) {
-  const text = e.toLowerCase();
-  for (let i = 0; i < gameStore.length; i++) {
-    let gameName = gameStore[i].getAttribute("Name");
-    if (gameName.toLowerCase().indexOf(text) > -1) {
-      gameStore[i].style.display = "";
-    } else {
-      gameStore[i].style.display = "none";
-    }
-  }
-}
-
-
 
 
 
