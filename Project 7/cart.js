@@ -1,13 +1,14 @@
+//คลิกที่ปุ่่มเพิ่มของในตะกล้า แล้วไปทำงานต่อ
 const addToCartButtons = document.getElementsByClassName("shop-game-button");
-for (var i = 0; i < addToCartButtons.length; i++) {
-  var button = addToCartButtons[i];
+for (let i = 0; i < addToCartButtons.length; i++) {
+  let button = addToCartButtons[i];
   button.addEventListener("click", addToCartClicked);
 }
 
 let cart = document.getElementById("cart");
 cart.innerHTML = `<a href="#table" class="btn btn-dark position-relative"><i class="fas fa-shopping-cart"></i> Cart<span class="cart-header position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></a>`;
 //โครงหน้า
-var table = document.getElementById("table");
+let table = document.getElementById("table");
 table.setAttribute("class", "container-xxl table table-hover cart-game");
 table.innerHTML = `
 <thead>
@@ -20,20 +21,20 @@ table.innerHTML = `
     </tr>
 </thead>`;
 
-var tbody = document.createElement("tbody");
+let tbody = document.createElement("tbody");
 tbody.setAttribute("class", "tbody-cart");
 table.appendChild(tbody);
 
 function quantityinput() {
   const quantityInputs = document.getElementsByClassName("cart-quantity-input");
-  for (var i = 0; i < quantityInputs.length; i++) {
-    var input = quantityInputs[i];
+  for (let i = 0; i < quantityInputs.length; i++) {
+    let input = quantityInputs[i];
     input.addEventListener("input", quantityChanged);
   }
 }
 
 function quantityChanged(event) {
-  var input = event.target;
+  let input = event.target;
   if (isNaN(input.value) || input.value <= 0) {
     input.value = 1;
   }
@@ -50,7 +51,7 @@ function addToCartClicked(event) {
   const status = shopItem.getElementsByClassName("game-status")[0].innerText;
   const imagesrc = shopItem.getElementsByClassName("game-image")[0].src;
 
-  var price = pricewithstring.match(/\d/g);
+  let price = pricewithstring.match(/\d/g);
   price = price.join("");
 
   if (checkAdd(id)) {
@@ -59,8 +60,8 @@ function addToCartClicked(event) {
 }
 
 function checkAdd(id) {
-  var i = 0;
-  var cartItemId = document.getElementsByClassName("cart-id");
+  let i = 0;
+  let cartItemId = document.getElementsByClassName("cart-id");
   for (i = 0; i < cartItemId.length; i++) {
     if (cartItemId[i].innerText == id) {
       addQuantity();
@@ -71,19 +72,19 @@ function checkAdd(id) {
   return true;
 
   function addQuantity(){
-    var input = document.getElementsByClassName("cart-quantity-input")
+    let input = document.getElementsByClassName("cart-quantity-input")
         input[i].value++;
     updateCart();
   }
 }
 
 function addItemToCart(id, name, price, status, imagesrc) {
-  var tr = document.createElement("tr");
-  var th = document.createElement("th");
-  var td1 = document.createElement("td");
-  var td2 = document.createElement("td");
-  var td3 = document.createElement("td");
-  var td4 = document.createElement("td");
+  let tr = document.createElement("tr");
+  let th = document.createElement("th");
+  let td1 = document.createElement("td");
+  let td2 = document.createElement("td");
+  let td3 = document.createElement("td");
+  let td4 = document.createElement("td");
   tbody.appendChild(tr);
   tr.appendChild(th);
   tr.appendChild(td1);
@@ -113,19 +114,19 @@ function addItemToCart(id, name, price, status, imagesrc) {
 }
 
 function updateCart() {
-  var cartGame = document.getElementsByClassName("tbody-cart")[0];
-  var cartTr = cartGame.getElementsByTagName("tr");
-  var total = 0;
+  let cartGame = document.getElementsByClassName("tbody-cart")[0];
+  let cartTr = cartGame.getElementsByTagName("tr");
+  let total = 0;
 
-  for (var i = 0; i < cartTr.length; i++) {
-    var cartprice = cartTr[i];
-    var priceElement = cartprice.getElementsByClassName("cart-price")[0];
-    var quantityElement = cartprice.getElementsByClassName(
+  for (let i = 0; i < cartTr.length; i++) {
+    let cartprice = cartTr[i];
+    let priceElement = cartprice.getElementsByClassName("cart-price")[0];
+    let quantityElement = cartprice.getElementsByClassName(
       "cart-quantity-input"
     )[0];
 
-    var price = parseFloat(priceElement.innerText);
-    var quantity = quantityElement.value;
+    let price = parseFloat(priceElement.innerText);
+    let quantity = quantityElement.value;
     total = total + price * quantity;
   }
   total = Math.round(total * 100) / 100;
@@ -136,25 +137,25 @@ function updateCart() {
 }
 
 function removeCart() {
-  var removeCartItemButtons = document.getElementsByClassName("btn-danger");
-  for (var i = 0; i < removeCartItemButtons.length; i++) {
-    var button = removeCartItemButtons[i];
+  let removeCartItemButtons = document.getElementsByClassName("btn-danger");
+  for (let i = 0; i < removeCartItemButtons.length; i++) {
+    let button = removeCartItemButtons[i];
     button.addEventListener("click", removeCartItem);
   }
 }
 
 function removeCartItem(event) {
-  var buttonClicked = event.target;
+  let buttonClicked = event.target;
   buttonClicked.parentElement.parentElement.remove();
   updateCart();
 }
 
 function countItem() {
-  var tbodycart = document.getElementsByClassName("tbody-cart")[0];
-  var countth = tbodycart.getElementsByClassName("count-item");
+  let tbodycart = document.getElementsByClassName("tbody-cart")[0];
+  let countth = tbodycart.getElementsByClassName("count-item");
 
-  var carthead = document.getElementsByClassName("cart-header");
-  for (var i = 0; i < countth.length; i++) {
+  let carthead = document.getElementsByClassName("cart-header");
+  for (let i = 0; i < countth.length; i++) {
     countth[i].innerText = i + 1;
     carthead[0].innerText = ` ${i + 1}`;
   }
