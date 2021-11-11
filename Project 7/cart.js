@@ -25,6 +25,13 @@ let tbody = document.createElement("tbody");
 tbody.setAttribute("class", "tbody-cart");
 table.appendChild(tbody);
 
+let cartForLocal = [];
+var storedcart = JSON.parse(localStorage.getItem("cartForLocal"));
+checkLocal();
+
+
+
+
 function quantityinput() {
   const quantityInputs = document.getElementsByClassName("cart-quantity-input");
   for (let i = 0; i < quantityInputs.length; i++) {
@@ -39,6 +46,7 @@ function quantityChanged(event) {
     input.value = 1;
   }
   updateCart();
+  forQuantity()
 }
 
 function addToCartClicked(event) {
@@ -54,9 +62,18 @@ function addToCartClicked(event) {
   let price = pricewithstring.match(/\d/g);
   price = price.join("");
 
-  if (checkAdd(id)) {
-    addItemToCart(id, name, price, status, imagesrc);
-  }
+  addItemToCart(id, name, price, status, imagesrc);
+  forQuantity()
+}
+
+function checkLocal(){
+  storedcart.forEach(element => { 
+    for(let i=0; i< element.quantity; i++){
+      addItemToCart(element.id, element.name, element.price, element.status, element.imagesrc);
+      
+    }
+  });
+  
 }
 
 function checkAdd(id) {
@@ -64,12 +81,11 @@ function checkAdd(id) {
   let cartItemId = document.getElementsByClassName("cart-id");
   for (i = 0; i < cartItemId.length; i++) {
     if (cartItemId[i].innerText == id) {
-      addQuantity();
-    //   alert("This item is already added to the cart");
-      return false;
+      addQuantity()
+      return true
     }
   }
-  return true;
+  return false;
 
   function addQuantity(){
     let input = document.getElementsByClassName("cart-quantity-input")
@@ -79,6 +95,8 @@ function checkAdd(id) {
 }
 
 function addItemToCart(id, name, price, status, imagesrc) {
+  if (checkAdd(id) == true) {
+  } else{
   let tr = document.createElement("tr");
   let th = document.createElement("th");
   let td1 = document.createElement("td");
@@ -93,10 +111,9 @@ function addItemToCart(id, name, price, status, imagesrc) {
   tr.appendChild(td4);
 
   th.setAttribute("class", "count-item");
-
   td1.innerHTML = `
   <span>
-    <img src ="${imagesrc}" height = "150" class="float-start mx-2">
+    <img src ="${imagesrc}" height = "150" class="cart-image float-start mx-2">
     <p>
         <span class ="cart-id">${id}</span>
     <br><span class ="cart-name">${name}</span>
@@ -105,12 +122,10 @@ function addItemToCart(id, name, price, status, imagesrc) {
   td2.innerHTML = `<span><input style="width: 70px;" class="cart-quantity-input form-control" type="number" value="1"></span>`;
   td3.innerHTML = `<span class ="cart-price">${price}</span>`;
   td4.innerHTML = `<button class="btn btn-danger" type="button">REMOVE</button>`;
-  alert(
-    `Was successfully added \n\n ${id} \n ${name} \n Price: ${price} \n ${status}`
-  );
   quantityinput();
   removeCart();
   updateCart();
+  }
 }
 
 function updateCart() {
@@ -160,3 +175,32 @@ function countItem() {
     carthead[0].innerText = ` ${i + 1}`;
   }
 }
+
+//เอาไว้นับ quantity แอด เข้า localstorage เพราะโครงสร้างเก่าแย่เกิน ขกแก้แล้ว
+function forQuantity(){
+  let cartGame = document.getElementsByClassName("tbody-cart")[0];
+  let cartTr = cartGame.getElementsByTagName("tr");
+  cartForLocal = [];
+  for (let i = 0; i < cartTr.length; i++) {
+    let cartList = cartTr[i];
+    let priceElement = cartList.getElementsByClassName("cart-price")[0];
+    let quantityElement = cartList.getElementsByClassName("cart-quantity-input")[0];
+    let idElement = cartList.getElementsByClassName("cart-id")[0];
+    let nameElement = cartList.getElementsByClassName("cart-name")[0];
+    let statusElement = cartList.getElementsByClassName("cart-status")[0];
+    let imagesrcElement = cartList.getElementsByClassName("cart-image")[0];
+
+    let imagesrc = imagesrcElement.src;
+    let id = idElement.innerText;
+    let name = nameElement.innerText;
+    let status = statusElement.innerText;
+    let price = parseFloat(priceElement.innerText);
+    let quantity = quantityElement.value;
+
+    cartForLocal.push({id, name, price, status, imagesrc, quantity});
+    localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal));
+  }
+
+}
+
+
