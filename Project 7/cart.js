@@ -200,7 +200,6 @@ function forQuantity(){
     cartForLocal.push({id, name, price, status, imagesrc, quantity});
     localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal));
   }
-
 }
 
 
