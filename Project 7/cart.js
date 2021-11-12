@@ -132,23 +132,38 @@ function updateCart() {
   let cartGame = document.getElementsByClassName("tbody-cart")[0];
   let cartTr = cartGame.getElementsByTagName("tr");
   let total = 0;
-
+  cartForLocal = [];
   for (let i = 0; i < cartTr.length; i++) {
-    let cartprice = cartTr[i];
-    let priceElement = cartprice.getElementsByClassName("cart-price")[0];
-    let quantityElement = cartprice.getElementsByClassName(
-      "cart-quantity-input"
-    )[0];
+    let cartList = cartTr[i];
+    let priceElement = cartList.getElementsByClassName("cart-price")[0];
+    let quantityElement = cartList.getElementsByClassName("cart-quantity-input")[0];
 
     let price = parseFloat(priceElement.innerText);
     let quantity = quantityElement.value;
     total = total + price * quantity;
+
+    //เอาไว้นับ quantity แอด เข้า localstorage เพราะโครงสร้างเก่าแย่เกิน ขกแก้แล้ว
+    //ใส่เพิ่มไว้เก็บ quantity โดยเฉพาะ โครงสร้างกากเกิน
+    let idElement = cartList.getElementsByClassName("cart-id")[0];
+    let nameElement = cartList.getElementsByClassName("cart-name")[0];
+    let statusElement = cartList.getElementsByClassName("cart-status")[0];
+    let imagesrcElement = cartList.getElementsByClassName("cart-image")[0];
+    let imagesrc = imagesrcElement.src;
+    let id = idElement.innerText;
+    let name = nameElement.innerText;
+    let status = statusElement.innerText;
+    cartForLocal.push({id, name, price, status, imagesrc, quantity});
+    localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal));
+  }
+  if(cartTr.length == 0){
+    localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal));
   }
   total = Math.round(total * 100) / 100;
   document.getElementsByClassName(
     "cart-total-price"
   )[0].innerHTML = `<div style="">Total cost is $${total}</div>`;
   countItem();
+
 }
 
 function removeCart() {
@@ -174,32 +189,11 @@ function countItem() {
     countth[i].innerText = i + 1;
     carthead[0].innerText = ` ${i + 1}`;
   }
-}
-
-//เอาไว้นับ quantity แอด เข้า localstorage เพราะโครงสร้างเก่าแย่เกิน ขกแก้แล้ว
-function forQuantity(){
-  let cartGame = document.getElementsByClassName("tbody-cart")[0];
-  let cartTr = cartGame.getElementsByTagName("tr");
-  cartForLocal = [];
-  for (let i = 0; i < cartTr.length; i++) {
-    let cartList = cartTr[i];
-    let priceElement = cartList.getElementsByClassName("cart-price")[0];
-    let quantityElement = cartList.getElementsByClassName("cart-quantity-input")[0];
-    let idElement = cartList.getElementsByClassName("cart-id")[0];
-    let nameElement = cartList.getElementsByClassName("cart-name")[0];
-    let statusElement = cartList.getElementsByClassName("cart-status")[0];
-    let imagesrcElement = cartList.getElementsByClassName("cart-image")[0];
-
-    let imagesrc = imagesrcElement.src;
-    let id = idElement.innerText;
-    let name = nameElement.innerText;
-    let status = statusElement.innerText;
-    let price = parseFloat(priceElement.innerText);
-    let quantity = quantityElement.value;
-
-    cartForLocal.push({id, name, price, status, imagesrc, quantity});
-    localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal));
+  if(countth.length == 0){
+    carthead[0].innerText = ``;
   }
 }
+
+
 
 
