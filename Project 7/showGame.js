@@ -51,7 +51,7 @@ sampleData.forEach((value) => {
 
   const contentDiv = document.createElement("div");
   contentDiv.appendChild(img); //ใส่รูปอิอิ
-  contentDiv.setAttribute("class", "card col-md-6 mx-auto mh-100 px-md-4 py-md-4 mx-md-4 my-md-4");
+  contentDiv.setAttribute("class", "card col-md-6 mx-auto mh-100 px-md-4 py-md-4 mx-md-4 my-md-4 bg-light");
   contentDiv.setAttribute("Name", value.Name);
   contentDiv.id = "Game";
 
