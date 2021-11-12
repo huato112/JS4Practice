@@ -121,7 +121,7 @@ function addItemToCart(id, name, price, status, imagesrc) {
   </span>`;
   td2.innerHTML = `<span><input style="width: 70px;" class="cart-quantity-input form-control" type="number" value="1"></span>`;
   td3.innerHTML = `<span class ="cart-price">${price}</span>`;
-  td4.innerHTML = `<button class="btn btn-danger" type="button">REMOVE</button>`;
+  td4.innerHTML = `<button class="btn btn-danger cart-remove" type="button">REMOVE</button>`;
   quantityinput();
   removeCart();
   updateCart();
@@ -167,7 +167,7 @@ function updateCart() {
 }
 
 function removeCart() {
-  let removeCartItemButtons = document.getElementsByClassName("btn-danger");
+  let removeCartItemButtons = document.getElementsByClassName("cart-remove");
   for (let i = 0; i < removeCartItemButtons.length; i++) {
     let button = removeCartItemButtons[i];
     button.addEventListener("click", removeCartItem);
