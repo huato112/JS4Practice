@@ -2,7 +2,6 @@ import { sampleData } from "./product.js";
 
 let contentProd = document.createElement("div")
 contentProd.setAttribute("class", "container-xxl")
-
 let listProd = document.createElement("div"); //create <div></div>
 listProd.setAttribute("class", "row row-cols-lg-5 my-md-4");
 

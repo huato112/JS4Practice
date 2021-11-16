@@ -5,7 +5,6 @@ for (let i = 0; i < addToCartButtons.length; i++) {
   button.addEventListener("click", addToCartClicked); //พอโดนคลิกไปเรียก function addToCartClicked
 }
 
-let cartForLocal = [];
 loadLocalCart();
 //ถ้ามีก็สั่งแอดลงตะกร้าให้แสดงสินค้า
 
@@ -115,7 +114,7 @@ function updateCart() {
   let cartGame = document.getElementsByClassName("tbody-cart")[0];
   let cartTr = cartGame.getElementsByTagName("tr");
   let total = 0;
-  cartForLocal = [];
+  let cartForLocal = [];
   for (let i = 0; i < cartTr.length; i++) {
     let cartList = cartTr[i];
     let priceElement = cartList.getElementsByClassName("cart-price")[0];
