@@ -1,41 +1,7 @@
 import { sampleData } from "./product.js";
 
-// search แบบเก่ายาวเกินเลยทำสั้น ๆ innerhtml เอา
-// let searchdiv1 = document.createElement("div");
-// searchdiv1.setAttribute("class", "input-group");
-// let searchdiv = document.createElement("div");
-// searchdiv.setAttribute("class", "form-outline");
-
-// let searchbar = document.createElement("input");
-// searchbar.setAttribute("class", "form-control");
-// searchbar.setAttribute("type", "text");
-// searchbar.setAttribute("id", "search");
-// searchbar.setAttribute("type", "text");
-// searchbar.setAttribute("placeholder", "Search");
-// searchbar.setAttribute("style", "max-width: 500px;");
-// searchbar.setAttribute("style", "min-width: 100px;");
-
-// let searchbtn = document.createElement("button");
-// // searchbtn.appendChild(document.createTextNode("Search "));
-// searchbtn.setAttribute("class", "btn btn-primary");
-// searchbtn.setAttribute("type", "button");
-// searchbtn.setAttribute("style", "width: 40px;");
-// searchbtn.setAttribute("id", "searchbtn");
-
-// let inbtn = document.createElement("i");
-// inbtn.setAttribute("class", "fas fa-search");
-
-// searchbtn.appendChild(inbtn);
-
-// searchdiv.appendChild(searchbar);
-// searchdiv1.appendChild(searchdiv);
-// searchdiv1.appendChild(searchbtn);
-// document.body.appendChild(header)
-
-
 let contentProd = document.createElement("div")
 contentProd.setAttribute("class", "container-xxl")
-
 
 let listProd = document.createElement("div"); //create <div></div>
 listProd.setAttribute("class", "row row-cols-lg-5 my-md-4");
@@ -68,20 +34,6 @@ sampleData.forEach((value) => {
   <span class = "game-status">Status: ${value.Status}</span>
   `;
 
-  // content2div.appendChild(document.createElement("br"));
-  // content2div.appendChild(document.createTextNode(`ID: ${value.Id}`)); //ใส่ข้อมูลใน div ย่อย
-  // content2div.appendChild(document.createElement("br"));
-  // content2div.appendChild(document.createTextNode(`Name: ${value.Name}`)); //ใส่ข้อมูลใน div ย่อย
-  // content2div.appendChild(document.createElement("br"));
-  // content2div.appendChild(document.createTextNode(`Price: ${value.Price}`));
-  // content2div.appendChild(document.createElement("br"));
-  // content2div.appendChild(document.createTextNode(`Status: ${value.Status}`));
-  // content2div.appendChild(document.createElement("br"));
-
-  // class btn btn-primary
-  // create button
-  // class btn btn-danger
-  // cursor: not-allowed
   let btn = document.createElement("a");
   if (value.Status == "Out of stock") {
     btn.setAttribute("class", "btn btn-danger cursor-not-allowed mt-auto");

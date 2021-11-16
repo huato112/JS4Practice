@@ -2,36 +2,15 @@
 const addToCartButtons = document.getElementsByClassName("shop-game-button");
 for (let i = 0; i < addToCartButtons.length; i++) {
   let button = addToCartButtons[i];
-  button.addEventListener("click", addToCartClicked);
+  button.addEventListener("click", addToCartClicked); //พอโดนคลิกไปเรียก function addToCartClicked
 }
 
-let cart = document.getElementById("cart");
-cart.innerHTML = `<a href="#table" class="btn btn-dark position-relative"><i class="fas fa-shopping-cart"></i> Cart<span class="cart-header position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span></a>`;
-//โครงหน้า
-let table = document.getElementById("table");
-table.setAttribute("class", "container-xxl table table-hover cart-game");
-table.innerHTML = `
-<thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Game</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Price</th>
-        <th scope="col" class="cart-total-price"></th>
-    </tr>
-</thead>`;
-
-let tbody = document.createElement("tbody");
-tbody.setAttribute("class", "tbody-cart");
-table.appendChild(tbody);
-
 let cartForLocal = [];
-var storedcart = JSON.parse(localStorage.getItem("cartForLocal"));
-checkLocal();
+loadLocalCart();
+//ถ้ามีก็สั่งแอดลงตะกร้าให้แสดงสินค้า
 
 
-
-
+//ถ้าเปลี่ยนตัวเลขในช่อง quantity อันนี้ดักจับ แล้วไปเรียก quantityChanged อีกที
 function quantityinput() {
   const quantityInputs = document.getElementsByClassName("cart-quantity-input");
   for (let i = 0; i < quantityInputs.length; i++) {
@@ -40,15 +19,16 @@ function quantityinput() {
   }
 }
 
+//พอโดนเรียก ก็จะมาดูว่าตัวที่โดนเรียก แล้วสั่ง updatecartทำงาน
 function quantityChanged(event) {
   let input = event.target;
   if (isNaN(input.value) || input.value <= 0) {
-    input.value = 1;
+    input.value = 1; //ถ้าเป็น null หรือค่า <= 0 จะตั้งให้เป็น 1
   }
   updateCart();
-  forQuantity()
 }
 
+//พอคลิกแล้วก็ดึงข้อมูลว่าคลิกเกมไหนมา แล้วเอาข้อมูลมาส่งไป add ลงตะกร้า
 function addToCartClicked(event) {
   const button = event.target;
   const shopItem = button.parentElement.parentElement; // ถอยมา 2 ขั้น จะได้ให้ ไอคำสั่งข้างล่างบรรทัดนี้ อ่าน div class จากปุ่มนี้
@@ -58,24 +38,25 @@ function addToCartClicked(event) {
     shopItem.getElementsByClassName("game-price")[0].innerText;
   const status = shopItem.getElementsByClassName("game-status")[0].innerText;
   const imagesrc = shopItem.getElementsByClassName("game-image")[0].src;
-
   let price = pricewithstring.match(/\d/g);
   price = price.join("");
-
   addItemToCart(id, name, price, status, imagesrc);
-  forQuantity()
 }
 
-function checkLocal(){
-  storedcart.forEach(element => { 
+//ดึงข้อมูลจาก Local ถ้ามีข้อมูล ก็เอาข้อมูลเพิ่มลงตะกร้า
+function loadLocalCart() {
+  var storedcart = JSON.parse(localStorage.getItem("cartForLocal")); //เรียกให้ไปเอา localstorage ที่เก็บไว้
+  if (storedcart == null || storedcart == undefined) return []; //เช็คว่า่ undefined ไหม
+  storedcart.forEach((element) => {
     for(let i=0; i< element.quantity; i++){
       addItemToCart(element.id, element.name, element.price, element.status, element.imagesrc);
-      
     }
   });
-  
+  return true;
 }
 
+
+//ซื้อของที่มีอยู่แล้ว ถ้ามีอยู่แล้วจะไปสั่งเพิ่ม quantity
 function checkAdd(id) {
   let i = 0;
   let cartItemId = document.getElementsByClassName("cart-id");
@@ -94,9 +75,11 @@ function checkAdd(id) {
   }
 }
 
+//เพิ่มสินค้าลงตะกร้าก็จะสร้างตารางมาใส่ข้อมูล
 function addItemToCart(id, name, price, status, imagesrc) {
   if (checkAdd(id) == true) {
   } else{
+  let tbody = document.getElementsByClassName("tbody-cart")[0];
   let tr = document.createElement("tr");
   let th = document.createElement("th");
   let td1 = document.createElement("td");
@@ -109,7 +92,6 @@ function addItemToCart(id, name, price, status, imagesrc) {
   tr.appendChild(td2);
   tr.appendChild(td3);
   tr.appendChild(td4);
-
   th.setAttribute("class", "count-item");
   td1.innerHTML = `
   <span>
@@ -128,6 +110,7 @@ function addItemToCart(id, name, price, status, imagesrc) {
   }
 }
 
+//เรียกใช้คำนวนราคารวมกับจะมีเก็บข้อมูลลง localstorage
 function updateCart() {
   let cartGame = document.getElementsByClassName("tbody-cart")[0];
   let cartTr = cartGame.getElementsByTagName("tr");
@@ -166,6 +149,7 @@ function updateCart() {
 
 }
 
+//ดักว่ากดปุ่มลบสินค้าในตะกร้า
 function removeCart() {
   let removeCartItemButtons = document.getElementsByClassName("cart-remove");
   for (let i = 0; i < removeCartItemButtons.length; i++) {
@@ -174,16 +158,17 @@ function removeCart() {
   }
 }
 
+//ลบสินค้าในตะกร้า
 function removeCartItem(event) {
   let buttonClicked = event.target;
   buttonClicked.parentElement.parentElement.remove();
   updateCart();
 }
 
-function countItem() {
+//นับจำนวนสินค้าในตะกร้าตอนนี้
+function countItem() { 
   let tbodycart = document.getElementsByClassName("tbody-cart")[0];
   let countth = tbodycart.getElementsByClassName("count-item");
-
   let carthead = document.getElementsByClassName("cart-header");
   for (let i = 0; i < countth.length; i++) {
     countth[i].innerText = i + 1;
