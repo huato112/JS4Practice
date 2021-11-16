@@ -10,7 +10,7 @@ header.innerHTML = `
                 <div class="form-outline">
                   <input class="form-control mr-sm-2" type="search" id="search" placeholder="Search">
                 </div>
-                <button class="btn btn-outline-secondary my-2 my-sm-0" type="button" id="searchbtn">
+                <button class="btn btn-primary my-2 my-sm-0" type="button" id="searchbtn">
                   <i class="fas fa-search" aria-hidden="true"></i> Search
                 </button>
               </div>

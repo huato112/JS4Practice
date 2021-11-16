@@ -142,7 +142,7 @@ function updateCart() {
     let quantity = quantityElement.value;
     total = total + price * quantity;
 
-    //เอาไว้นับ quantity แอด เข้า localstorage เพราะโครงสร้างเก่าแย่เกิน ขกแก้แล้ว
+    //เอาไว้นับ quantity แอด เข้า localstorage เพราะโครงสร้างเก่าแย่เกิน 
     //ใส่เพิ่มไว้เก็บ quantity โดยเฉพาะ โครงสร้างกากเกิน
     let idElement = cartList.getElementsByClassName("cart-id")[0];
     let nameElement = cartList.getElementsByClassName("cart-name")[0];
