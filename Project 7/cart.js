@@ -8,7 +8,6 @@ for (let i = 0; i < addToCartButtons.length; i++) {
 loadLocalCart();
 //ถ้ามีก็สั่งแอดลงตะกร้าให้แสดงสินค้า
 
-
 //ถ้าเปลี่ยนตัวเลขในช่อง quantity อันนี้ดักจับ แล้วไปเรียก quantityChanged อีกที
 function quantityinput() {
   const quantityInputs = document.getElementsByClassName("cart-quantity-input");
@@ -124,8 +123,8 @@ function updateCart() {
     let quantity = quantityElement.value;
     total = total + price * quantity;
 
-    //เอาไว้นับ quantity แอด เข้า localstorage เพราะโครงสร้างเก่าแย่เกิน 
-    //ใส่เพิ่มไว้เก็บ quantity โดยเฉพาะ โครงสร้างกากเกิน
+    //เอาไว้นับ quantity แอด เข้า localstorage
+    //ใส่เพิ่มไว้เก็บ quantity โดยเฉพาะ
     let idElement = cartList.getElementsByClassName("cart-id")[0];
     let nameElement = cartList.getElementsByClassName("cart-name")[0];
     let statusElement = cartList.getElementsByClassName("cart-status")[0];
@@ -145,7 +144,6 @@ function updateCart() {
     "cart-total-price"
   )[0].innerHTML = `<div style="">Total cost is $${total}</div>`;
   countItem();
-
 }
 
 //ดักว่ากดปุ่มลบสินค้าในตะกร้า

@@ -1,44 +1,36 @@
 let theme = document.getElementsByClassName("theme-set")[0];
 theme.addEventListener("click", select);
 
-let countFromCookie = getCookie(`count`);
-let count = 0;
- if (countFromCookie != ``){
-    count = parseInt(countFromCookie);
-    if(count == 1){
-        dark();
-    }
-    else{
-        light();
-    }
-    
-    
+let count = `light`;;
+loadTheme(getCookie(`theme`)); //dark
+
+function loadTheme(fn){
+  if(fn == `dark`){
+    count = `dark`;
+    return dark();
+  }else{
+    return light();
+  }
+  function light(){
+    document.body.className = "bg-white text-dark";
+    setCookie('theme', `light`, 1000)
+}
+  function dark(){
+      document.body.className = "bg-secondary";
+      setCookie('theme', `dark`, 1000)
+  }
+  
 }
 
 function select(){
-    if(count == 0){
-        count = 1;
-        dark();
-        return true;
+    if(count == `dark`){
+        count = `light`;
+        return loadTheme(`light`);
     }
-    if (count == 1){
-        count = 0;
-        light();
-        return true;
+    if (count == `light`){
+        count = `dark`;
+        return loadTheme(`dark`);
     }
-}
-
-let card = document.getElementsByClassName("card-boxx");
-let table = document.getElementById("table")[0];
-
-function light(){
-    document.body.className = "bg-white text-dark";
-    setCookie('count', count, 1000)
-}
-
-function dark(){
-    document.body.className = "bg-secondary";
-    setCookie('count', count, 1000)
 }
 
 function getCookie(cname) {
@@ -56,7 +48,7 @@ function getCookie(cname) {
     return "";
 }
 
-function setCookwie(cname, cvalue, exdays) {
+function setCookie(cname, cvalue, exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     let expires = "expires="+d.toUTCString();
