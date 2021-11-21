@@ -1,9 +1,9 @@
 import { sampleData } from "./product.js";
 
-let contentProd = document.createElement("div")
-contentProd.setAttribute("class", "container-xxl")
-let listProd = document.createElement("div");
-listProd.setAttribute("class", "row row-cols-lg-5 my-md-4");
+let contentContainer = document.createElement("div")
+contentContainer.setAttribute("class", "container-xxl")
+let productPosition = document.createElement("div");
+productPosition.setAttribute("class", "row row-cols-lg-5 my-md-4");
 
 sampleData.forEach((value) => {
   let img = document.createElement("img");
@@ -11,23 +11,23 @@ sampleData.forEach((value) => {
   img.height = "250";
   img.setAttribute("class", "game-image card-img-top img-fluid");
 
-  const contentDiv = document.createElement("div");
-  contentDiv.appendChild(img);
-  contentDiv.setAttribute("class", "card-boxx card col-md-6 mx-auto mh-100 px-md-4 py-md-4 mx-md-4 my-md-4 bg-light");
-  contentDiv.setAttribute("Name", value.Name);
-  contentDiv.id = "Game";
+  const card = document.createElement("div");
+  card.appendChild(img);
+  card.setAttribute("class", "card-boxx card col-md-6 mx-auto mh-100 px-md-4 py-md-4 mx-md-4 my-md-4 bg-light");
+  card.setAttribute("Name", value.Name);
+  card.id = "Game";
 
-  const content2divv = document.createElement("div");
-  content2divv.setAttribute("class", "d-flex flex-column card-body ");
-  content2divv.innerHTML = `
+  const cardBody = document.createElement("div");
+  cardBody.setAttribute("class", "d-flex flex-column card-body ");
+  cardBody.innerHTML = `
   <p class="card-text"><br>
-  <span class = "game-id">ID : ${value.Id}</span>
+  <span class = "game-id">${value.Id}</span>
   <br>
-  <span class = "game-name">Name: ${value.Name}</span>
+  <span class = "game-name">${value.Name}</span>
   <br>
-  <span class = "game-price">Price: ${value.Price}</span>
+  <span class = "game-price">${value.Price}</span>
   <br>
-  <span class = "game-status">Status: ${value.Status}</span>
+  <span class = "game-status">${value.Status}</span>
   `;
 
   //สร้างปุ่ม
@@ -40,9 +40,9 @@ sampleData.forEach((value) => {
     btn.setAttribute("class", "btn btn-primary shop-game-button mt-auto");
     btn.appendChild(document.createTextNode("Add to cart"));
   }
-  content2divv.appendChild(btn);
-  contentDiv.appendChild(content2divv);
-  listProd.appendChild(contentDiv);
-  contentProd.appendChild(listProd);
+  cardBody.appendChild(btn);
+  card.appendChild(cardBody);
+  productPosition.appendChild(card);
+  contentContainer.appendChild(productPosition);
 });
-  document.getElementById("Index").appendChild(contentProd)
+  document.getElementById("Index").appendChild(contentContainer)

@@ -1,3 +1,5 @@
+import { sampleData } from "./product.js";
+
 //คลิกที่ปุ่่มเพิ่มของในตะกล้า แล้วไปทำงานต่อ
 const addToCartButtons = document.getElementsByClassName("shop-game-button");
 for (let i = 0; i < addToCartButtons.length; i++) {
@@ -35,20 +37,24 @@ function addToCartClicked(event) {
   const pricewithstring =
     shopItem.getElementsByClassName("game-price")[0].innerText;
   const status = shopItem.getElementsByClassName("game-status")[0].innerText;
-  const imagesrc = shopItem.getElementsByClassName("game-image")[0].src;
+  const img = shopItem.getElementsByClassName("game-image")[0].src;
   let price = pricewithstring.match(/\d/g);
-  price = price.join("");
-  addItemToCart(id, name, price, status, imagesrc);
+  price = price.join("") ;
+  addItemToCart(id, name, price, status, img);
 }
 
 //ดึงข้อมูลจาก Local ถ้ามีข้อมูล ก็เอาข้อมูลเพิ่มลงตะกร้า
 function loadLocalCart() {
   var storedcart = JSON.parse(localStorage.getItem("cartForLocal")); //เรียกให้ไปเอา localstorage ที่เก็บไว้
-  if (storedcart == null || storedcart == undefined) return []; //เช็คว่า่ undefined ไหม
+  if (storedcart == null || storedcart == undefined) return []; //เช็คว่า undefined ไหม
   storedcart.forEach((element) => {
-    for(let i=0; i< element.quantity; i++){
-      addItemToCart(element.id, element.name, element.price, element.status, element.imagesrc);
-    }
+    sampleData.forEach((allGame) => {
+      if (element.id === allGame.Id){
+        for(let i=0; i< element.quantity; i++){
+          addItemToCart(allGame.Id, allGame.Name, allGame.Price, allGame.Status, allGame.img);
+        }
+      }
+    })
   });
   return true;
 }
@@ -126,14 +132,8 @@ function updateCart() {
     //เอาไว้นับ quantity แอด เข้า localstorage
     //ใส่เพิ่มไว้เก็บ quantity โดยเฉพาะ
     let idElement = cartList.getElementsByClassName("cart-id")[0];
-    let nameElement = cartList.getElementsByClassName("cart-name")[0];
-    let statusElement = cartList.getElementsByClassName("cart-status")[0];
-    let imagesrcElement = cartList.getElementsByClassName("cart-image")[0];
-    let imagesrc = imagesrcElement.src;
     let id = idElement.innerText;
-    let name = nameElement.innerText;
-    let status = statusElement.innerText;
-    cartForLocal.push({id, name, price, status, imagesrc, quantity});
+    cartForLocal.push({id, quantity});
     localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal));
   }
   if(cartTr.length == 0){
