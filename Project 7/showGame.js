@@ -21,17 +21,17 @@ sampleData.forEach((value) => {
   cardBody.setAttribute("class", "d-flex flex-column card-body ");
   cardBody.innerHTML = `
   <p class="card-text"><br>
-  <span class = "game-id">${value.Id}</span>
+  <span>ID: </span><span class = "game-id">${value.Id}</span>
   <br>
-  <span class = "game-name">${value.Name}</span>
+  <span>GAME: </span><span class = "game-name">${value.Name}</span>
   <br>
-  <span class = "game-price">${value.Price}</span>
+  <span>PRICE: </span><span class = "game-price">${value.Price}</span>
   <br>
-  <span class = "game-status">${value.Status}</span>
+  <span>STATUS: </span><span class = "game-status">${value.Status}</span>
   `;
 
   //สร้างปุ่ม
-  let btn = document.createElement("a");
+  const btn = document.createElement("a");
   if (value.Status == "Out of stock") {
     btn.setAttribute("class", "btn btn-danger cursor-not-allowed mt-auto");
     btn.setAttribute("style", "cursor: not-allowed");

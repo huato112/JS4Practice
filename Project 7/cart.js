@@ -101,15 +101,13 @@ function addItemToCart(id, name, price, status, imagesrc) {
   <span>
     <img src ="${imagesrc}" height = "150" class="cart-image float-start mx-2">
     <p>
-        <span class ="cart-id">${id}</span>
-    <br><span class ="cart-name">${name}</span>
-    <br><span class ="cart-status">${status}</span>
+        <span>ID: </span><span class ="cart-id">${id}</span>
+    <br><span>GAME: </span><span class ="cart-name">${name}</span>
+    <br><span>STATUS: </span><span class ="cart-status">${status}</span>
   </span>`;
   td2.innerHTML = `<span><input style="width: 70px;" class="cart-quantity-input form-control" type="number" value="1"></span>`;
   td3.innerHTML = `<span class ="cart-price">${price}</span>`;
   td4.innerHTML = `<button class="btn btn-danger cart-remove" type="button">REMOVE</button>`;
-  quantityinput();
-  removeCart();
   updateCart();
   }
 }
@@ -143,7 +141,9 @@ function updateCart() {
   document.getElementsByClassName(
     "cart-total-price"
   )[0].innerHTML = `<div style="">Total cost is $${total}</div>`;
-  countItem();
+  countItem(); //เรียกใช้ให้พวก event ต่าง ๆ ทำงาน
+  removeCart() //เรียกใช้ให้พวก event ต่าง ๆ ทำงาน
+  quantityinput(); //เรียกใช้ให้พวก event ต่าง ๆ ทำงาน
 }
 
 //ดักว่ากดปุ่มลบสินค้าในตะกร้า
