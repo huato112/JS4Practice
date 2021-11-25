@@ -34,12 +34,12 @@ function addToCartClicked(event) {
   const shopItem = button.parentElement.parentElement; // ถอยมา 2 ขั้น จะได้ให้ ไอคำสั่งข้างล่างบรรทัดนี้ อ่าน div class จากปุ่มนี้
   const id = shopItem.getElementsByClassName("game-id")[0].innerText;
   const name = shopItem.getElementsByClassName("game-name")[0].innerText;
-  const pricewithstring =
+  const price =
     shopItem.getElementsByClassName("game-price")[0].innerText;
   const status = shopItem.getElementsByClassName("game-status")[0].innerText;
   const img = shopItem.getElementsByClassName("game-image")[0].src;
-  let price = pricewithstring.match(/\d/g);
-  price = price.join("") ;
+  // let price = pricewithstring.match(/\d/g); "464 adfasda" จะเป็น 464 ไว้ตัดตัวอักษรแต่ไม่ใช้แล้ว
+  // price = price.join("") ;
   addItemToCart(id, name, price, status, img);
 }
 
