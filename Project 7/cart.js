@@ -137,10 +137,7 @@ function updateCart() {
   if(cartTr.length == 0){
     localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal));
   }
-  total = Math.round(total * 100) / 100;
-  document.getElementsByClassName(
-    "cart-total-price"
-  )[0].innerHTML = `<div style="">Total cost is $${total}</div>`;
+  document.getElementsByClassName("cart-total-price")[0].innerHTML = `<div style="">Total cost is $${total}</div>`;
   countItem(); //เรียกใช้ให้พวก event ต่าง ๆ ทำงาน
   removeCart() //เรียกใช้ให้พวก event ต่าง ๆ ทำงาน
   quantityinput(); //เรียกใช้ให้พวก event ต่าง ๆ ทำงาน
@@ -165,17 +162,13 @@ function removeCartItem(event) {
 //นับจำนวนสินค้าในตะกร้าตอนนี้
 function countItem() { 
   let tbodycart = document.getElementsByClassName("tbody-cart")[0];
-  let countth = tbodycart.getElementsByClassName("count-item");
+  let countItems = tbodycart.getElementsByClassName("count-item");
   let carthead = document.getElementsByClassName("cart-header");
-  for (let i = 0; i < countth.length; i++) {
-    countth[i].innerText = i + 1;
+  for (let i = 0; i < countItems.length; i++) {
+    countItems[i].innerText = i + 1;
     carthead[0].innerText = ` ${i + 1}`;
   }
-  if(countth.length == 0){
+  if(countItems.length == 0){
     carthead[0].innerText = ``;
   }
 }
-
-
-
-
