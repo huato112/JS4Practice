@@ -3,16 +3,17 @@ import * as cookieutil from "./cookieutil.js";
 let theme = document.getElementsByClassName("theme-set")[0];
 theme.addEventListener("click", select);
 
-let count = `light`;;
+let color = `light`; //กำหนดค่า default สีเป็นสีขาว
 loadTheme(cookieutil.getCookie(`theme`)); //dark
 
 function loadTheme(fn){
   if(fn == `dark`){
-    count = `dark`;
+    color = `dark`;
     return dark();
   }else{
     return light();
   }
+  
   function light(){
     document.body.className = "bg-white text-dark";
     cookieutil.setCookie('theme', `light`, 1000)
@@ -25,12 +26,12 @@ function loadTheme(fn){
 }
 
 function select(){
-    if(count == `dark`){
-        count = `light`;
+    if(color == `dark`){
+      color = `light`;
         return loadTheme(`light`);
     }
-    if (count == `light`){
-        count = `dark`;
+    if (color == `light`){
+        color = `dark`;
         return loadTheme(`dark`);
     }
 }

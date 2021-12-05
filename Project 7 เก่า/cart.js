@@ -8,40 +8,7 @@ for (let i = 0; i < addToCartButtons.length; i++) {
 }
 
 loadLocalCart();
-//ถ้ามีก็สั่งแอดลงตะกร้าให้แสดงสินค้า
-
-//ถ้าเปลี่ยนตัวเลขในช่อง quantity อันนี้ดักจับ แล้วไปเรียก quantityChanged อีกที
-function quantityinput() {
-  const quantityInputs = document.getElementsByClassName("cart-quantity-input");
-  for (let i = 0; i < quantityInputs.length; i++) {
-    let input = quantityInputs[i];
-    input.addEventListener("input", quantityChanged);
-  }
-}
-
-//พอโดนเรียก ก็จะมาดูว่าตัวที่โดนเรียก แล้วสั่ง updatecartทำงาน
-function quantityChanged(event) {
-  let input = event.target;
-  if (isNaN(input.value) || input.value <= 0) {
-    input.value = 1; //ถ้าเป็น null หรือค่า <= 0 จะตั้งให้เป็น 1
-  }
-  updateCart();
-}
-
-//พอคลิกแล้วก็ดึงข้อมูลว่าคลิกเกมไหนมา แล้วเอาข้อมูลมาส่งไป add ลงตะกร้า
-function addToCartClicked(event) {
-  const button = event.target;
-  const shopItem = button.parentElement.parentElement; // ถอยมา 2 ขั้น จะได้ให้ ไอคำสั่งข้างล่างบรรทัดนี้ อ่าน div class จากปุ่มนี้
-  const id = shopItem.getElementsByClassName("game-id")[0].innerText;
-  const name = shopItem.getElementsByClassName("game-name")[0].innerText;
-  const price =
-    shopItem.getElementsByClassName("game-price")[0].innerText;
-  const status = shopItem.getElementsByClassName("game-status")[0].innerText;
-  const img = shopItem.getElementsByClassName("game-image")[0].src;
-  // let price = pricewithstring.match(/\d/g); "464 adfasda" จะเป็น 464 ไว้ตัดตัวอักษรแต่ไม่ใช้แล้ว
-  // price = price.join("") ;
-  addItemToCart(id, name, price, status, img);
-}
+//ถ้ามีก็สั่งแอดลงตะกร้าให้แสดงสินค้า.
 
 //ดึงข้อมูลจาก Local ถ้ามีข้อมูล ก็เอาข้อมูลเพิ่มลงตะกร้า
 function loadLocalCart() {
@@ -60,28 +27,22 @@ function loadLocalCart() {
 }
 
 
-//ซื้อของที่มีอยู่แล้ว ถ้ามีอยู่แล้วจะไปสั่งเพิ่ม quantity
-function checkAdd(id) {
-  let i = 0;
-  let cartItemId = document.getElementsByClassName("cart-id");
-  for (i = 0; i < cartItemId.length; i++) {
-    if (cartItemId[i].innerText == id) {
-      addQuantity()
-      return true
-    }
-  }
-  return false;
-
-  function addQuantity(){
-    let input = document.getElementsByClassName("cart-quantity-input")
-        input[i].value++;
-    updateCart();
-  }
+//พอคลิกแล้วก็ดึงข้อมูลว่าคลิกเกมไหนมา แล้วเอาข้อมูลมาส่งไป add ลงตะกร้า
+function addToCartClicked(event) {
+  const button = event.target; 
+  const shopItem = button.parentElement.parentElement; // ถอยมา 2 ขั้น จะได้ให้ ไอคำสั่งข้างล่างบรรทัดนี้ อ่าน div class จากปุ่มนี้
+  const id = shopItem.getElementsByClassName("game-id")[0].innerText;
+  const name = shopItem.getElementsByClassName("game-name")[0].innerText; //หลังถอยก็สั่งให้มาหา game-name และก็ game-id 
+  const price =
+    shopItem.getElementsByClassName("game-price")[0].innerText;
+  const status = shopItem.getElementsByClassName("game-status")[0].innerText;
+  const img = shopItem.getElementsByClassName("game-image")[0].src;
+  addItemToCart(id, name, price, status, img);
 }
 
 //เพิ่มสินค้าลงตะกร้าก็จะสร้างตารางมาใส่ข้อมูล
 function addItemToCart(id, name, price, status, imagesrc) {
-  if (checkAdd(id) == true) {
+  if (checkAdd(id) == true) { //ถ้ามีสินค้าอยู่แล้วก็จะสร้างตารางออกมาด้านล่างของเว็บ
   } else{
   let tbody = document.getElementsByClassName("tbody-cart")[0];
   let tr = document.createElement("tr");
@@ -112,6 +73,46 @@ function addItemToCart(id, name, price, status, imagesrc) {
   }
 }
 
+
+//ถ้าเปลี่ยนตัวเลขในช่อง quantity อันนี้ดักจับ แล้วไปเรียก quantityChanged อีกที
+function quantityinput() {
+  const quantityInputs = document.getElementsByClassName("cart-quantity-input");
+  for (let i = 0; i < quantityInputs.length; i++) {
+    let input = quantityInputs[i];
+    input.addEventListener("input", quantityChanged);
+  }
+}
+
+//พอโดนเรียก ก็จะมาดูว่าตัวที่โดนเรียก แล้วสั่ง updatecart ทำงาน
+function quantityChanged(event) {
+  let input = event.target;
+  if (isNaN(input.value) || input.value <= 0) {
+    input.value = 1; //ถ้าเป็น null หรือค่า <= 0 จะตั้งให้เป็น 1
+  }
+  updateCart();
+}
+
+
+//เช็คว่าซื้อของที่มีอยู่แล้ว จะได้ไม่ต้องไปสร้างตารางใหม่ ถ้ามีอยู่แล้วจะไปสั่งเพิ่ม quantity แทน
+function checkAdd(id) {
+  let i = 0;
+  let cartItemId = document.getElementsByClassName("cart-id");
+  for (i = 0; i < cartItemId.length; i++) {
+    if (cartItemId[i].innerText == id) {
+      addQuantity()
+      return true
+    }
+  }
+  return false;
+
+  function addQuantity(){
+    let input = document.getElementsByClassName("cart-quantity-input")
+        input[i].value++;
+    updateCart();
+  }
+}
+
+
 //เรียกใช้คำนวนราคารวมกับจะมีเก็บข้อมูลลง localstorage
 function updateCart() {
   let cartGame = document.getElementsByClassName("tbody-cart")[0];
@@ -121,7 +122,7 @@ function updateCart() {
   for (let i = 0; i < cartTr.length; i++) {
     let cartList = cartTr[i];
     let priceElement = cartList.getElementsByClassName("cart-price")[0];
-    let quantityElement = cartList.getElementsByClassName("cart-quantity-input")[0];
+    let quantityElement = cartList.getElementsByClassName("cart-quantity-input")[0]; //ดูแต่ละ tr ว่าราคาเท่าไหร่ รายละเอียด จำนวน
 
     let price = parseFloat(priceElement.innerText);
     let quantity = quantityElement.value;
@@ -131,8 +132,8 @@ function updateCart() {
     //ใส่เพิ่มไว้เก็บ quantity โดยเฉพาะ
     let idElement = cartList.getElementsByClassName("cart-id")[0];
     let id = idElement.innerText;
-    cartForLocal.push({id, quantity});
-    localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal));
+    cartForLocal.push({id, quantity}); //เก็บ array โดยใน array จะมี id กับ quantity
+    localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal)); //คำสั่งไว้เก็บ
   }
   if(cartTr.length == 0){
     localStorage.setItem("cartForLocal", JSON.stringify(cartForLocal));
@@ -149,14 +150,14 @@ function removeCart() {
   for (let i = 0; i < removeCartItemButtons.length; i++) {
     let button = removeCartItemButtons[i];
     button.addEventListener("click", removeCartItem);
-  }
+  } 
 }
 
 //ลบสินค้าในตะกร้า
 function removeCartItem(event) {
   let buttonClicked = event.target;
-  buttonClicked.parentElement.parentElement.remove();
-  updateCart();
+  buttonClicked.parentElement.parentElement.remove(); //ถอยมา 2 ขั้นแล้วก็ลบทั้ง tr แล้วก็จะ updatecart ต่อ
+  updateCart(); //ต้อง update ตลอดเวลาเพราะว่าเดี๋ยวเรื่องเงินใน localstorage จะไม่อัพเดท 
 }
 
 //นับจำนวนสินค้าในตะกร้าตอนนี้
@@ -172,3 +173,7 @@ function countItem() {
     carthead[0].innerText = ``;
   }
 }
+
+
+
+
