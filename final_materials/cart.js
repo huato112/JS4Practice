@@ -1,14 +1,9 @@
 export let cart = {
     cartList: [],
 
-    add(id){
-            if(this.cartList.some((value) => value.id == id)){
-                this.cartList.find((index) => index.id == id).quantity++;
-                this.save();
-                return;
-            }
-            this.cartList.push({id: id, quantity: 1})
-            this.save();
+    add(id, quantity){
+        this.cartList.push({id: id, quantity: quantity, status : "pending"})
+        this.save();
     },
 
     save() {
@@ -39,5 +34,12 @@ export let cart = {
         })
         return listItem;
     },
+
+    status(id){
+        if(this.cartList.some((value) => value.id == id)){
+            this.cartList.find((index) => index.id == id).status = "done";
+            this.save()
+        }
+    }
 
 }
